@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events season winter 2022/2023</title>
+</head>
+<body>
+
+<div class="col-sm-5">
+    <ul class="list-1">
+        {% for x in events %}
+            <li>
+                <a href="details/{{ x.id }}">
+                    <img src="{{event.poster.url}}">
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+
+    <!-- Force next columns to break to new line -->
+    <div class="w-100"></div>
+
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+  </div>
+</div>
+
+<!--  <h1> Event Calendar </h1>-->
+<!--    <ul>-->
+<!--      {% for x in events %}-->
+<!--        <li><a href="details/{{ x.id }}">{{ x.date }} {{ x.title_event }}</a></li>-->
+<!--      {% endfor %}-->
+<!--    </ul>-->
+
+<!--  <button class="btn btn-primary my-4"><a href="{%url 'create_event' %}">Add new event</a></button>-->
+
+
+</body>
+</html>
