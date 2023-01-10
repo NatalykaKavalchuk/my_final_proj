@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <title>Create Event</title>
 </head>
+
+{% include "navbar.html" %}
+
 <body>
 
-    {% load crispy_forms_tags %}
+{% load crispy_forms_tags %}
 
-    <div class="container">
-        <h2 class="my-4">Add a new event</h2>
-        <form action="{% url 'create_event' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
+<div class="col-md-4 mb-4">
+    <h2 class="my-4">Add a new event</h2>
+    <form action="{% url 'create_event' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
 
-            <div class="form-error">{{ form.non_field_errors }}</div>
+        <div class="form-error">{{ form.non_field_errors }}</div>
 
-                {{event_form|crispy}}
-                <button class="btn btn-primary my-4" type="submit">Submit</button>
-        </form>
-    </div>
+        {{event_form|crispy}}
+        <button class="btn btn-primary my-4" type="submit">Submit</button>
+    </form>
+</div>
 
 
 </body>
 </html>
+
+

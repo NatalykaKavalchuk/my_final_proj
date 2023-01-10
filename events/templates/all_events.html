@@ -1,36 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Events season winter 2022/2023</title>
-</head>
+{% include "navbar.html" %}
+
 <body>
 
-<div class="col-sm-5">
-    <ul class="list-1">
+{% load bootstrap3 %}
+
+<div class="container py-3">
+    <h2>Календарь мероприятий</h2>
+    <hr>
+    <br>
+    <div class="row">
         {% for x in events %}
-            <li>
-                <a href="details/{{ x.id }}">
-                    <img src="{{event.poster.url}}">
-                </a>
-            </li>
+        <div class="col-md-4 mb-4">
+            <div class="card h-200" style="border:none">
+
+                <img src="{{ x.poster.url }}" class="card-img-top" alt="{{ x.title_event}}"
+                     style="width: auto; height: 250px; object-fit: scale-down;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ x.title_event }}</h5>
+                    <p class="card-text text-muted" style="font-size:12px">{{ x.date }}</p>
+                    <a href="details/{{ x.id }}" class="btn btn-info">Подробнее</a>
+                    <br>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
-
+    </div>
 </div>
+<a href="{%url 'create_event' %}" class="btn btn-info">Add new event</a>
 
-<div class="container">
-  <div class="row">
-    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
-    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
 
-    <!-- Force next columns to break to new line -->
-    <div class="w-100"></div>
+</body>
+</html>
 
-    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
-    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
-  </div>
-</div>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Events season winter 2022/2023</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="col-sm-5">-->
+<!--    <ul class="list-1">-->
+<!--        {% for x in events %}-->
+<!--            <li>-->
+<!--                <a href="details/{{ x.id }}">-->
+<!--                    <img src="{{event.poster.url}}">-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+
+<!--</div>-->
+
+<!--<div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>-->
+<!--    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>-->
+
+<!--    &lt;!&ndash; Force next columns to break to new line &ndash;&gt;-->
+<!--    <div class="w-100"></div>-->
+
+<!--    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>-->
+<!--    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <!--  <h1> Event Calendar </h1>-->
 <!--    <ul>-->

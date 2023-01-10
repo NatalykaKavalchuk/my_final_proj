@@ -47,4 +47,3 @@ def details(request, id):
 
 
 
-

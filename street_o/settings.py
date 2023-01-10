@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'events.apps.EventsConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
