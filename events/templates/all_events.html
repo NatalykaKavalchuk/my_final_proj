@@ -1,8 +1,11 @@
-{% include "navbar.html" %}
+{% extends "master.html" %}
 
-<body>
+{% block title %}Winter 2022/2023{% endblock %}
 
-{% load bootstrap3 %}
+
+{% block content %}
+{% load bootstrap4 %}
+
 
 <div class="container py-3">
     <h2>Календарь мероприятий</h2>
@@ -20,62 +23,71 @@
                     <p class="card-text text-muted" style="font-size:12px">{{ x.date }}</p>
                     <a href="details/{{ x.id }}" class="btn btn-info">Подробнее</a>
                     <br>
+                    <br>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
-<a href="{%url 'create_event' %}" class="btn btn-info">Add new event</a>
 
-
-</body>
-</html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Events season winter 2022/2023</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<div class="col-sm-5">-->
-<!--    <ul class="list-1">-->
-<!--        {% for x in events %}-->
-<!--            <li>-->
-<!--                <a href="details/{{ x.id }}">-->
-<!--                    <img src="{{event.poster.url}}">-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        {% endfor %}-->
-<!--    </ul>-->
-
+<!--<div class="text-right" style="position: fixed; right: 20px; top: 10%; padding: 10px;">-->
+<!--    <a href="{%url 'create_event' %}" class="btn btn-danger">Add new event</a>-->
 <!--</div>-->
 
-<!--<div class="container">-->
-<!--  <div class="row">-->
-<!--    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>-->
-<!--    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>-->
+<style>
+.button {
+    position: fixed;
+    right: 20px;
+    top: 25%;
+    border-radius: 4px;
+    background-color: #3F729B;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
 
-<!--    &lt;!&ndash; Force next columns to break to new line &ndash;&gt;-->
-<!--    <div class="w-100"></div>-->
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
 
-<!--    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>-->
-<!--    <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>-->
-<!--  </div>-->
-<!--</div>-->
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
 
-<!--  <h1> Event Calendar </h1>-->
-<!--    <ul>-->
-<!--      {% for x in events %}-->
-<!--        <li><a href="details/{{ x.id }}">{{ x.date }} {{ x.title_event }}</a></li>-->
-<!--      {% endfor %}-->
-<!--    </ul>-->
+.button:hover span {
+  padding-right: 25px;
+}
 
-<!--  <button class="btn btn-primary my-4"><a href="{%url 'create_event' %}">Add new event</a></button>-->
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+
+{% if perms.events.add_events %}
+    <a href="{%url 'create_event' %}" class="button"><span>Add new event</span></a>
+{% endif %}
 
 
-</body>
-</html>
+{% endblock %}
+
+{% include "footer.html" %}
+
+
+
+

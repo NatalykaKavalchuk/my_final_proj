@@ -1,10 +1,12 @@
 from django.contrib import messages
-from django.http import HttpResponse, FileResponse, Http404
+from django.http import HttpResponse, FileResponse, Http404, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.template import loader
 
 from events.forms import EventForm
 from events.models import Events
+
+from django.contrib.auth.decorators import permission_required
 
 
 def home_page(request):
@@ -12,6 +14,7 @@ def home_page(request):
     return HttpResponse(template.render({'title': 'Home page'}))
 
 
+@permission_required("events.add_events")
 def create_event(request):
     if request.method == "POST":
         event_form = EventForm(request.POST, request.FILES)
@@ -38,12 +41,17 @@ def events(request):
 
 
 def details(request, id):
-    event = Events.objects.get(id=id)
-    template = loader.get_template('details.html')
-    context = {
-        'event': event,
-    }
-    return HttpResponse(template.render(context, request))
+    try:
+        event = Events.objects.get(id=id)
+        viewed_post = request.session.get('viewed_post', [])
+        if id not in viewed_post:
+            viewed_post.append(id)
+        request.session['viewed_post'] = viewed_post
+        return render(request, 'details.html', {'event': event})
+    except:
+        return HttpResponseNotFound()
 
 
-
+def testing(request):
+    template = loader.get_template('test.html')
+    return HttpResponse(template.render())

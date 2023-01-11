@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create Event</title>
-</head>
+{% extends "master.html" %}
 
-{% include "navbar.html" %}
+{% block title %}Create event{% endblock %}
 
-<body>
+
+{% block content %}
 
 {% load crispy_forms_tags %}
 
@@ -23,8 +19,8 @@
     </form>
 </div>
 
+{% endblock %}
 
-</body>
-</html>
+
 
 
