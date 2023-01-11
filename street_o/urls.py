@@ -23,8 +23,6 @@ urlpatterns = [
     path('', include('events.urls')),
 ]
 
-urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls')),
-]
+
 
 

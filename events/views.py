@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import permission_required
 
 def home_page(request):
     template = loader.get_template('home_page.html')
-    return HttpResponse(template.render({'title': 'Home page'}))
+    return HttpResponse(template.render({'title': 'Home page'}, request))
 
 
 @permission_required("events.add_events")

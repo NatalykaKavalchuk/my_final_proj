@@ -34,7 +34,7 @@ class RegisterView(View):
 
             return redirect(to='/')
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'my_messages': 'test'})
 
 
 class CustomLoginView(LoginView):
@@ -46,7 +46,7 @@ class CustomLoginView(LoginView):
         if not remember_me:
             self.request.session.set_expiry(0)
             self.request.session.modified = True
-        return super(CustomLoginView, self.form_valid(form))
+        return super(CustomLoginView, self).form_valid(form)
 
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
