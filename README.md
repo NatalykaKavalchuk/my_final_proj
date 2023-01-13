@@ -2,7 +2,7 @@
 
 https://github.com/NatalykaKavalchuk/my_final_proj.git
 
-1. manage.py runserver (python manage.py runserver)
+1. запуск: manage.py runserver (python manage.py runserver)
 2. применяемые технологии: bootstrap 4, pillow, python 3.11 
 
 3. Проблема:
