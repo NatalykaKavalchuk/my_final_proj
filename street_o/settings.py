@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'crispy_forms',
     'bootstrap4',
+    'account'
 ]
 
 MIDDLEWARE = [

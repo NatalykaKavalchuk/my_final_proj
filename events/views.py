@@ -55,3 +55,6 @@ def details(request, id):
 def testing(request):
     template = loader.get_template('test.html')
     return HttpResponse(template.render())
+
+
+

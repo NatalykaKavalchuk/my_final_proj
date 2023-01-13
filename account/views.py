@@ -1,40 +1,32 @@
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views import View
+#
+# from .forms import UserRegisterForm, LoginForm
 
-from .forms import UserRegisterForm, LoginForm
+from django.contrib.auth import authenticate, login
+
+from account.forms import LoginForm, UserRegisterForm
 
 
-class RegisterView(View):
-    form_class = UserRegisterForm
-    initial = {'key': 'value'}
-    template_name = 'registration/register.html'
-
-    # def dispatch(self, request, *args, **kwargs):
-    #     if request.user.is_authenticated:
-    #         return redirect(to='/')
-    #
-    #     return super(RegisterView, self).dispatch(request, *args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-
+def register_user(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}')
-
-            return redirect(to='/')
-
-        return render(request, self.template_name, {'form': form, 'my_messages': 'test'})
+            new_user = form.save()
+            messages.info(request, "Thanks for registering. You are now logged in.")
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
+            return HttpResponseRedirect('/')
+    else:
+        form = UserRegisterForm()
+    return render(request=request, template_name="registration/register.html", context={'form': form})
 
 
 class CustomLoginView(LoginView):

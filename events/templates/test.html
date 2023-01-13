@@ -1,19 +1,67 @@
 {% extends "master.html" %}
 
-{% block title %}
-  My Test Page
-{% endblock %}
-
+{% block title %} Create new event {% endblock title%}
 
 {% block content %}
-
-<h1>Hello</h1>
-
-<p>This page contains a footer in a template.</p>
-
-{% endblock %}
-
-
-
-<p>Check out the two templates to see what they look like, and views.py to see the reference to the child template.</p>
-
+<div class="form-content my-3 p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
+                    <div class="card-header justify-content-center">
+                        <h3 class="font-weight-light my-1 text-center">Create new Event</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'create_event' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group">
+                                        <label class="small mb-1">Title event</label>
+                                        {{ event_form }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group">
+                                        <label class="small mb-1">Date of event</label>
+                                        {{ event_form.date }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group">
+                                        <label class="small mb-1">Poster</label>
+                                        {{ event_form.poster }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group">
+                                        <label class="small mb-1">Technical information</label>
+                                        {{ event_form.tech_info }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group">
+                                        <label class="small mb-1">Result of Event</label>
+                                        {{ event_form.result }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group mt-0 mb-1">
+                                        <button name="login" class="col-md-12 btn btn-info" id="login">Sign in
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {% endblock%}
