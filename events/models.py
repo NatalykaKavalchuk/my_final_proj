@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-
+from account.models import User
 
 
 class Events(models.Model):
@@ -11,7 +11,7 @@ class Events(models.Model):
     poster = models.ImageField(upload_to="poster/%Y")
     tech_info = models.FileField(upload_to='tech_files', blank=True, null=True)
     result = models.URLField(max_length=200, db_index=True, blank=True)
-    # participants = models.ManyToManyField(User, blank=True)
+    participants = models.ManyToManyField(User, blank=True)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
@@ -28,7 +28,7 @@ class Events(models.Model):
 
 
 class Submission(models.Model):
-    # participant =
+    participant = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True)
     event = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True)
     distance = models.TextField(max_length=4)
     chip = models.TextField(max_length=2)

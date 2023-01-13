@@ -21,5 +21,3 @@ class User(models.Model):
         verbose_name = "User"
         verbose_name_plural = "Users"
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
