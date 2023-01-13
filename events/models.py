@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from account.models import User
+
 
 
 class Events(models.Model):
@@ -25,6 +25,19 @@ class Events(models.Model):
     class Meta:
         verbose_name = "Event"
         verbose_name_plural = "Events"
+
+
+class Submission(models.Model):
+    # participant =
+    event = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True)
+    distance = models.TextField(max_length=4)
+    chip = models.TextField(max_length=2)
+    num_chip = models.TextField(max_length=10)
+    agree = models.BooleanField()
+
+    def __str__(self):
+        return self.event
+
 
 
 

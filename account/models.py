@@ -1,12 +1,13 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
 
 
 class User(models.Model):
-    username = models.CharField(max_length=100, primary_key=True)
+    username = models.CharField(max_length=100, primary_key=True, unique=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password1 = models.CharField(max_length=50)
     password2 = models.CharField(max_length=50)
 
@@ -19,3 +20,6 @@ class User(models.Model):
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []

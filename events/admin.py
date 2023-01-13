@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from events.models import Events
+from events.models import Events, Submission
 
 
 class EventsAdmin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ class EventsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Events, EventsAdmin)
+admin.site.register(Submission)
