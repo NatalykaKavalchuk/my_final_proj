@@ -3,8 +3,8 @@ from django.http import HttpResponse, FileResponse, Http404, HttpResponseNotFoun
 from django.shortcuts import render, redirect
 from django.template import loader
 
-from events.forms import EventForm
-from events.models import Events
+from events.forms import EventForm, SubmissionForm
+from events.models import Events, Submission
 
 from django.contrib.auth.decorators import permission_required
 
@@ -57,4 +57,17 @@ def testing(request):
     return HttpResponse(template.render())
 
 
+def registration_to_event(request):
+    if request.method == "POST":
+        registration_form = SubmissionForm(request.GET)
+        if registration_form.is_valid():
+            registration_form.save()
+            messages.success(request, ('you have successfully registered!'))
+        else:
+            messages.error(request, 'Error saving form')
 
+        return redirect("events")
+    registration_form = SubmissionForm()
+    registrations = Submission.objects.all()
+    return render(request=request, template_name="registration.html",
+                  context={'registration_form': registration_form, 'registrations': registrations})

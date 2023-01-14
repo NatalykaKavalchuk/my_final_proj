@@ -16,6 +16,7 @@ urlpatterns = [
     path('create_event/', events.views.create_event, name='create_event'),
     path('events/', events.views.events, name='events'),
     path('events/details/<int:id>', events.views.details, name='details'),
+    path('events/registration', events.views.registration_to_event, name='registration'),
     path('test/', events.views.testing, name='test'),
     path('account/register.html', register_user, name='register'),
     path('login/', CustomLoginView.as_view(redirect_authenticated_user=True, template_name='registration/login.html',

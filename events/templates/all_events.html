@@ -14,10 +14,10 @@
     <div class="row">
         {% for x in events %}
         <div class="col-md-4 mb-4">
-            <div class="card h-200" style="border:none">
+            <div class="card h-100" style="border:none">
 
                 <img src="{{ x.poster.url }}" class="card-img-top" alt="{{ x.title_event}}"
-                     style="width: auto; height: 250px; object-fit: scale-down;">
+                     style="width: auto; height: 310px; object-fit: scale-down;">
                 <div class="card-body">
                     <h5 class="card-title">{{ x.title_event }}</h5>
                     <p class="card-text text-muted" style="font-size:12px">{{ x.date }}</p>
@@ -80,7 +80,7 @@
 </style>
 
 {% if perms.events.add_events %}
-    <a href="{%url 'create_event' %}" class="button"><span>Add new event</span></a>
+    <a href="{% url 'create_event' %}" class="button"><span>Add new event</span></a>
 {% endif %}
 
 

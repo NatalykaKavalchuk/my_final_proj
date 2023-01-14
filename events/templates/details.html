@@ -22,7 +22,8 @@
     <h3><a href="{{ event.result }}">Результаты</a></h3>
     {% endif %}
 
-    <button type="button" class="btn btn-info">Регистрация</button>
+    <a href="{% url 'registration' %}" class="btn btn-info"><span>Регистрация</span></a>
+
     <hr>
 
     <button onclick="history.back()" class="btn btn-info">Назад </button>

@@ -6,12 +6,12 @@ from account.models import User
 
 User = get_user_model()
 
-class Events(models.Model):
 
+class Events(models.Model):
     title_event = models.CharField(max_length=255)
     date = models.DateField()
     poster = models.ImageField(upload_to="poster/%Y")
-    tech_info = models.FileField(upload_to='tech_files', blank=True, null=True)
+    tech_info = models.FileField(upload_to='tech_files/%Y', blank=True, null=True)
     result = models.URLField(max_length=200, db_index=True, blank=True)
     participants = models.ManyToManyField(User, blank=True)
     time_create = models.DateTimeField(auto_now_add=True)
@@ -30,24 +30,28 @@ class Events(models.Model):
 
 
 class Submission(models.Model):
-    participant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    DISTANCE_CHOICES = [
+        ('м21А', 'М21А'),
+        ('м21Е', 'М21Е'),
+        ('ж21А', 'Ж21А'),
+        ('ж21Е', 'Ж21Е'),
+    ]
+
+    CHIP_CHOICES = [
+        ('y', 'Да, у меня нет своего чипа'),
+        ('n', 'Нет, я возьму свой чип'),
+
+    ]
+
+    participant = models.ForeignKey(User, to_field='username', on_delete=models.SET_NULL, null=True)
     event = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True)
-    distance = models.TextField(max_length=4)
-    chip = models.TextField(max_length=2)
-    num_chip = models.TextField(max_length=10)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    distance = models.CharField(max_length=4, choices=DISTANCE_CHOICES)
+    chip = models.CharField(max_length=1, choices=CHIP_CHOICES)
+    num_chip = models.CharField(max_length=10)
     agree = models.BooleanField()
 
     def __str__(self):
-        return "{}".format(self.pk)
-
-
-
-
-
-
-
-
-
-
-
-
+        return str(self.event)
