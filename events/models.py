@@ -1,8 +1,10 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
 from account.models import User
 
+User = get_user_model()
 
 class Events(models.Model):
 
@@ -28,7 +30,7 @@ class Events(models.Model):
 
 
 class Submission(models.Model):
-    participant = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True)
+    participant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     event = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True)
     distance = models.TextField(max_length=4)
     chip = models.TextField(max_length=2)
@@ -36,10 +38,7 @@ class Submission(models.Model):
     agree = models.BooleanField()
 
     def __str__(self):
-        return self.event
-
-
-
+        return "{}".format(self.pk)
 
 
 
