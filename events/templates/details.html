@@ -7,25 +7,34 @@
 
 <h1> {{event.title_event}}</h1>
 
-    {% if event.poster %}
+{% if event.poster %}
     <p><img class="img-article-left" src="{{event.poster.url}}" width=350></p>
-    {% endif %}
+{% endif %}
 
-    <p>Дата: {{ event.date }}</p>
+<p>Дата: {{ event.date }}</p>
 
-    {% if event.tech_info %}
+{% if event.tech_info %}
     <h3><a href="{{ event.tech_info.url }}">Техническая информация</a></h3>
-    {% endif %}
+{% endif %}
 
-
+{% if event.event_status == 'Ongoing' %}
+    <div class="section" id="event--action--wrapper">
+        {% if registered %}
+            <p class="text--success">You have already registed for this event || </p>
+        {% else %}
+            <a href="{% url 'registration' %}" class="btn btn-info"><span>Регистрация</span></a>
+        {% endif %}
+    </div>
+{% else %}
+    <p>Registration closed for this event.</p>
     {% if event.result %}
-    <h3><a href="{{ event.result }}">Результаты</a></h3>
+        <h3><a href="{{ event.result }}">Результаты</a></h3>
     {% endif %}
 
-    <a href="{% url 'registration' %}" class="btn btn-info"><span>Регистрация</span></a>
+{% endif %}
 
-    <hr>
+<hr>
 
-    <button onclick="history.back()" class="btn btn-info">Назад </button>
+<button onclick="history.back()" class="btn btn-info">Назад</button>
 
 {% endblock %}
