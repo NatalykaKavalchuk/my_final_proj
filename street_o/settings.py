@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap4',
     'account'
+
 ]
 
 MIDDLEWARE = [
@@ -88,6 +89,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

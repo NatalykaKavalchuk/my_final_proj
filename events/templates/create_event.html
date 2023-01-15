@@ -49,6 +49,30 @@
                             <div class="form-row">
                                 <div class="col-md-10 offset-md-1">
                                     <div class="form-group">
+                                        <label class="small mb-1"> Start of registration </label>
+                                        {{ event_form.start_date }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group">
+                                        <label class="small mb-1"> End of event </label>
+                                        {{ event_form.start_date }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group">
+                                        <label class="small mb-1"> Deadline of registration </label>
+                                        {{ event_form.registration_deadline }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-10 offset-md-1">
+                                    <div class="form-group">
                                         <label class="small mb-1"> Technical information</label>
                                         {{ event_form.tech_info }}
                                     </div>
@@ -62,7 +86,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="col-md-10 offset-md-1">
                                     <div class="form-group mt-0 mb-1">
