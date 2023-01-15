@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
@@ -14,6 +16,9 @@ class Events(models.Model):
     tech_info = models.FileField(upload_to='tech_files/%Y', blank=True, null=True)
     result = models.URLField(max_length=200, db_index=True, blank=True)
     participants = models.ManyToManyField(User, blank=True)
+    start_date = models.DateTimeField(null=True)
+    end_date = models.DateTimeField(null=True)
+    registration_deadline = models.DateTimeField(null=True)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
@@ -28,9 +33,23 @@ class Events(models.Model):
         verbose_name = "Event"
         verbose_name_plural = "Events"
 
+    @property
+    def event_status(self):
+        status = None
+
+        present = datetime.now().timestamp()
+        deadline = self.registration_deadline.timestamp()
+        past_deadline = (present > deadline)
+
+        if past_deadline:
+            status = 'Finished'
+        else:
+            status = 'Ongoing'
+
+        return status
+
 
 class Submission(models.Model):
-
     DISTANCE_CHOICES = [
         ('м21А', 'М21А'),
         ('м21Е', 'М21Е'),
