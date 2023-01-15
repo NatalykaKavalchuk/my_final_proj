@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import NumberInput
 
+from account.models import User
 from events.models import Events, Submission
 
 
@@ -31,8 +32,9 @@ class SubmissionForm(forms.ModelForm):
         ('n', 'Нет, я возьму свой чип'),
 
     ]
-    # participant = forms.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    event = forms.ModelChoiceField(queryset=Events.objects.all())
+
+    event = forms.ModelChoiceField(queryset=Events.objects.all(), widget=forms.HiddenInput)
+    participant = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput)
     distance = forms.ChoiceField(choices=DISTANCE_CHOICES)
     chip = forms.ChoiceField(widget=forms.RadioSelect, choices=CHIP_CHOICES)
     num_chip = forms.IntegerField()
@@ -40,4 +42,5 @@ class SubmissionForm(forms.ModelForm):
 
     class Meta:
         model = Submission
-        fields = ['event', 'distance', 'chip', 'num_chip', 'agree']
+        fields = ['distance', 'chip', 'num_chip', 'agree']
+

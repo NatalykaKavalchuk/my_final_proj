@@ -63,14 +63,12 @@ class Submission(models.Model):
 
     ]
 
-    participant = models.ForeignKey(User, to_field='username', on_delete=models.SET_NULL, null=True)
+    participant = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     event = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
     distance = models.CharField(max_length=4, choices=DISTANCE_CHOICES)
     chip = models.CharField(max_length=1, choices=CHIP_CHOICES)
     num_chip = models.CharField(max_length=10)
-    agree = models.BooleanField()
+    agree = models.BooleanField(null=True)
 
     def __str__(self):
         return str(self.event)

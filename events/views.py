@@ -3,10 +3,11 @@ from django.http import HttpResponse, FileResponse, Http404, HttpResponseNotFoun
 from django.shortcuts import render, redirect
 from django.template import loader
 
+from account.models import User
 from events.forms import EventForm, SubmissionForm
 from events.models import Events, Submission
 
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 
 
 def home_page(request):
@@ -57,17 +58,28 @@ def testing(request):
     return HttpResponse(template.render())
 
 
-def registration_to_event(request):
+@login_required(login_url='/login')
+def registration_to_event(request, id):
+
+    event = Events.objects.get(id=id)
+    #
+    # participant = User.objects.get(username=username)
+
+    text_messages = ''
+
     if request.method == "POST":
-        registration_form = SubmissionForm(request.GET)
+        event.participants.add(request.user)
+
+        registration_form = SubmissionForm(request.POST)
         if registration_form.is_valid():
             registration_form.save()
-            messages.success(request, ('you have successfully registered!'))
+            text_messages = 'you have successfully registered!'
         else:
-            messages.error(request, 'Error saving form')
+            text_messages = 'Error saving form'
 
         return redirect("events")
     registration_form = SubmissionForm()
     registrations = Submission.objects.all()
     return render(request=request, template_name="registration.html",
-                  context={'registration_form': registration_form, 'registrations': registrations})
+                  context={'registration_form': registration_form, 'registrations': registrations, 'event': event,
+                           'text_messages': text_messages})

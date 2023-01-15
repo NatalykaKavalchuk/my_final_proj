@@ -22,7 +22,7 @@
         {% if registered %}
             <p class="text--success">You have already registed for this event || </p>
         {% else %}
-            <a href="{% url 'registration' %}" class="btn btn-info"><span>Регистрация</span></a>
+            <a href="{{ event.id }}/registration" class="btn btn-info"><span>Регистрация</span></a>
         {% endif %}
     </div>
 {% else %}
