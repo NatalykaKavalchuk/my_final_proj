@@ -14,13 +14,12 @@ class EventForm(forms.ModelForm):
     result = forms.URLField(required=False,
                             widget=forms.TextInput(attrs={'placeholder': 'Result', 'class': 'form-control', }))
 
-    start_date = forms.DateField(widget=forms.NumberInput(attrs={'type': 'date', 'class': 'form-control'}))
-    end_date = forms.DateField(widget=forms.NumberInput(attrs={'type': 'date', 'class': 'form-control'}))
-    registration_deadline = forms.DateField(widget=forms.NumberInput(attrs={'type': 'date', 'class': 'form-control'}))
+    start_date = forms.DateTimeField(widget=forms.NumberInput(attrs={'type': 'date', 'class': 'form-control'}))
+    registration_deadline = forms.DateTimeField(widget=forms.NumberInput(attrs={'type': 'date', 'class': 'form-control'}))
 
     class Meta:
         model = Events
-        fields = ['title_event', 'date', 'poster', 'start_date', 'end_date', 'registration_deadline', 'tech_info', 'result']
+        fields = ['title_event', 'date', 'poster', 'start_date', 'registration_deadline', 'tech_info', 'result']
 
 
 class SubmissionForm(forms.ModelForm):

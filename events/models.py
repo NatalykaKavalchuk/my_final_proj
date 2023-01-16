@@ -35,7 +35,6 @@ class Events(models.Model):
     result = models.URLField(max_length=200, db_index=True, blank=True)
     participants = models.ManyToManyField(User, blank=True)
     start_date = models.DateTimeField(null=True)
-    end_date = models.DateTimeField(null=True)
     registration_deadline = models.DateTimeField(null=True)
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
