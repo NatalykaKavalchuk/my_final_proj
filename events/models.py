@@ -1,12 +1,9 @@
 from datetime import datetime
 
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
-
-# User = get_user_model()
 
 class Events(models.Model):
     title_event = models.CharField(max_length=255)
@@ -14,7 +11,6 @@ class Events(models.Model):
     poster = models.ImageField(upload_to="poster/%Y")
     tech_info = models.FileField(upload_to='tech_files/%Y', blank=True, null=True)
     result = models.URLField(max_length=200, db_index=True, blank=True)
-    # user = models.ManyToManyField(User, blank=True)
     start_date = models.DateTimeField(null=True)
     registration_deadline = models.DateTimeField(null=True)
     time_create = models.DateTimeField(auto_now_add=True)
@@ -60,8 +56,5 @@ class Registration(models.Model):
     distance = models.CharField(max_length=4, choices=DISTANCE_CHOICES)
     data_reg = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
-
     def __str__(self):
         return str(self.event)
-
-

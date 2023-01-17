@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
+from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 
 from django.contrib.auth import login, authenticate
 
-from account.forms import LoginForm, UserRegisterForm
+from account.forms import UserRegisterForm
 
 
 def register_user(request):
@@ -16,7 +16,9 @@ def register_user(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # todo for future work
             # Profile.objects.create(username=user)
+
             messages.info(request, "Thanks for registering. You are now logged in.")
 
             login(request, user)
@@ -24,20 +26,6 @@ def register_user(request):
     else:
         form = UserRegisterForm()
     return render(request=request, template_name="registration/register.html", context={'form': form})
-
-
-# class CustomLoginView(LoginView):
-#     form_class = LoginForm
-#
-#     def form_valid(self, form):
-#         remember_me = form.cleaned_data.get('remember_me')
-#
-#         if not remember_me:
-#             self.request.session.set_expiry(0)
-#             self.request.session.modified = True
-#         return super(CustomLoginView, self).form_valid(form)
-#
-#     render(request, 'registration/login.html')
 
 
 def login_user(request):
@@ -67,23 +55,6 @@ def login_user(request):
         template_name="registration/login.html",
         context={'form': form}
     )
-
-
-
-
-
-    #
-    # if request.method == 'POST':
-    #     username = request.POST['username']
-    #     password = request.POST.get('password')
-    #     user = authenticate(request, username=username, password=password)
-    #     if user is not None:
-    #         login(request, user)
-    #         return redirect('home_page')
-    #     else:
-    #         messages.error(request, 'Неверно имя пользователя или пароль')
-    #         return redirect('login')
-    # return render(request, 'registration/login.html')
 
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):

@@ -23,7 +23,7 @@
                     <p class="card-text text-muted" style="font-size:12px">{{ x.date }}</p>
                     <a href="details/{{ x.id }}" class="btn btn-info">Подробнее</a>
                     {% if perms.events.add_events %}
-                        <a href="delete_event/{{x.id}}" class="btn btn-outline-danger">Удалить</a>
+                    <a href="delete_event/{{x.id}}" class="btn btn-outline-danger">Удалить</a>
                     {% endif%}
                     <br>
                     <br>
@@ -34,9 +34,6 @@
     </div>
 </div>
 
-<!--<div class="text-right" style="position: fixed; right: 20px; top: 10%; padding: 10px;">-->
-<!--    <a href="{%url 'create_event' %}" class="btn btn-danger">Add new event</a>-->
-<!--</div>-->
 
 <style>
 .button {
@@ -80,17 +77,12 @@
   opacity: 1;
   right: 0;
 }
+
+
 </style>
 
 {% if perms.events.add_events %}
-    <a href="{% url 'create_event' %}" class="button"><span>Add new event</span></a>
+<a href="{% url 'create_event' %}" class="button"><span>Add new event</span></a>
 {% endif %}
 
-
 {% endblock %}
-
-
-
-
-
-

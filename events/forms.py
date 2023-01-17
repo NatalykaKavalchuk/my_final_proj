@@ -1,7 +1,5 @@
 from django import forms
-from django.forms import NumberInput
 
-from account.models import User
 from events.models import Events, Registration
 
 
@@ -36,6 +34,3 @@ class RegistrationForm(forms.ModelForm):
     class Meta:
         model = Registration
         fields = ['distance']
-
-
-
