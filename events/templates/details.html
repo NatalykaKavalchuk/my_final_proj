@@ -28,12 +28,19 @@
             {% else %}
             <a href="{{ event.id }}/registration" class="btn btn-info"><span>Регистрация</span></a>
             {% endif %}
+<!--            <br>-->
+<!--            <li>Участники:<br>-->
+<!--                {% for user in event.participants.all %}-->
+<!--                    {{user.first_name}} {{user.last_name}}-->
+<!--                {% endfor %}-->
+<!--            </li>-->
+<!--            <br>-->
         </div>
         {% else %}
         <h6><i style="color:Tomato;">Registration closed for this event.</i></h6>
-        {% if event.result %}
-            <h5><a href="{{ event.result }}">Результаты</a></h5>
-        {% endif %}
+            {% if event.result %}
+                <h5><a href="{{ event.result }}">Результаты</a></h5>
+            {% endif %}
         {% endif %}
 
         <hr>

@@ -55,18 +55,23 @@
                         {% csrf_token %}
                         {{registration_form|crispy}}
 
-                        <input type="hidden" id="event" name="event" value="{{event.id}}">
-                        <input type="hidden" id="participant" name="participant" value="{{user}}">
+<!--                        <input type="hidden" id="user" name="user" value="{{user.id}}">-->
+<!--                        <input type="hidden" id="event" name="event" value="{{event.id}}">-->
 
+                        <!--{% if user.is_authenticated %}-->
                         <button class="btn btn-primary my-4" type="submit">Зарегистрироваться</button>
+<!--                        {% endif%}-->
                     </form>
 
                     {% if text_messages %}
-                    <p> {{ text_messages }}</p>
+                        <p> {{ text_messages }}</p>
                     {% endif %}
-
-
                 </div>
 
+            </div>
 
-                {% endblock content %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
