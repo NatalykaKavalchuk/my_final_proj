@@ -17,7 +17,7 @@ admin.site.register(Events, EventsAdmin)
 
 class RegistrationAdmin(admin.ModelAdmin):
 
-    list_display = ('id', 'event', 'data_reg')
+    list_display = ('id', 'event', 'user', 'distance', 'data_reg')
     list_display_links = ('id', 'event')
     search_fields = ('event',)
 

@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
@@ -36,19 +37,54 @@ def register_user(request):
 #             self.request.session.modified = True
 #         return super(CustomLoginView, self).form_valid(form)
 #
-#     render(request, 'users/login.html')
+#     render(request, 'registration/login.html')
+
 
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('homepage')
+
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('home_page')
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+            )
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Hello {user.username}! You have been logged in")
+                return redirect('home_page')
+
         else:
-            messages.info(request, 'Неверно имя пользователя или пароль')
-    return render(request, 'registration/login.html')
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+
+    form = AuthenticationForm()
+
+    return render(
+        request=request,
+        template_name="registration/login.html",
+        context={'form': form}
+    )
+
+
+
+
+
+    #
+    # if request.method == 'POST':
+    #     username = request.POST['username']
+    #     password = request.POST.get('password')
+    #     user = authenticate(request, username=username, password=password)
+    #     if user is not None:
+    #         login(request, user)
+    #         return redirect('home_page')
+    #     else:
+    #         messages.error(request, 'Неверно имя пользователя или пароль')
+    #         return redirect('login')
+    # return render(request, 'registration/login.html')
+
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     template_name = 'registration/password_reset.html'
