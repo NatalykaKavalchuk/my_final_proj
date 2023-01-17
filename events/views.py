@@ -11,8 +11,8 @@ from django.contrib.auth.decorators import permission_required, login_required
 
 
 def home_page(request):
-    template = loader.get_template('home_page.html')
-    return HttpResponse(template.render({'title': 'Home page'}, request))
+    return render(request, 'home_page.html')
+
 
 
 @permission_required("events.add_events")
@@ -68,19 +68,17 @@ def testing(request):
 def registration_to_event(request, id):
     event = Events.objects.get(id=id)
     if request.method == "POST":
-        # event.participants.add(request.user)
+        registration = Registration()
+        registration.user = request.user
+        registration.event = event
+        registration.distance = request.POST['distance']
+        if registration:
+            registration.save()
+            print("text")
 
-        # registration_form = RegistrationForm(user=request.user, event=event, distance=request.POST['distance'])
-        # registration_form = RegistrationForm()
-        # registration_form.user = request.user
-        # registration_form.event = event
-        # registration_form.distance = request.POST['distance']
-        # print(registration_form.is_valid())
-        # registration_form.save()
-        registration_form = Registration(request.POST, user=request.user, event=event)
-        if registration_form:
 
-            registration_form.save()
+            print("text")
+
             messages.success(request, 'You have successfully registered to event!')
         else:
             messages.error(request, 'Error saving form')
@@ -89,3 +87,30 @@ def registration_to_event(request, id):
     registrations = Registration.objects.all()
     return render(request=request, template_name="registration.html",
                   context={'registration_form': RegistrationForm, 'registrations': registrations, 'event': event, })
+
+
+
+
+
+
+    #     # event.participants.add(request.user)
+    #
+    #     # registration_form = RegistrationForm(user=request.user, event=event, distance=request.POST['distance'])
+    #     # registration_form = RegistrationForm()
+    #     # registration_form.user = request.user
+    #     # registration_form.event = event
+    #     # registration_form.distance = request.POST['distance']
+    #     # print(registration_form.is_valid())
+    #     # registration_form.save()
+    #     registration_form = Registration(request.POST, user=request.user, event=event)
+    #     if registration_form:
+    #
+    #         registration_form.save()
+    #         messages.success(request, 'You have successfully registered to event!')
+    #     else:
+    #         messages.error(request, 'Error saving form')
+    #
+    #     return redirect("events")
+    # registrations = Registration.objects.all()
+    # return render(request=request, template_name="registration.html",
+    #               context={'registration_form': RegistrationForm, 'registrations': registrations, 'event': event, })

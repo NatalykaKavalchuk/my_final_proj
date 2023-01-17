@@ -58,6 +58,7 @@ class Registration(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='attendee')
     event = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True)
     distance = models.CharField(max_length=4, choices=DISTANCE_CHOICES)
+    data_reg = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True)
 
 
     def __str__(self):

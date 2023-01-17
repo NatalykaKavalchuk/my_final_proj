@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from account.models import Profile
 from events.models import Events, Registration
 
 
@@ -18,7 +17,7 @@ admin.site.register(Events, EventsAdmin)
 
 class RegistrationAdmin(admin.ModelAdmin):
 
-    list_display = ('id', 'event',)
+    list_display = ('id', 'event', 'data_reg')
     list_display_links = ('id', 'event')
     search_fields = ('event',)
 
@@ -26,10 +25,8 @@ class RegistrationAdmin(admin.ModelAdmin):
 admin.site.register(Registration, RegistrationAdmin)
 
 
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'email')
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('id', 'username', 'email',)
     list_display_links = ('id', 'username')
     search_fields = ('email',)
 
-
-admin.site.register(Profile, ProfileAdmin)
