@@ -30,7 +30,8 @@
                             <div class="form-row">
                                 <div class="col-md-10 offset-md-1">
                                     <div class="form-group">
-                                        <label class="small mb-1">Username</label>
+                                        <label for="username">Username</label>
+<!--                                        <input type="username" class="form-control" id="username" placeholder="Enter username" name="username">-->
                                         {{ form.username }}
                                     </div>
                                 </div>
@@ -38,7 +39,8 @@
                             <div class="form-row">
                                 <div class="col-md-10 offset-md-1">
                                     <div class="form-group">
-                                        <label class="small mb-1">Password</label>
+                                        <label for="pswd">Password</label>
+<!--                                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">-->
                                         {{ form.password }}
                                     </div>
                                 </div>
@@ -46,9 +48,11 @@
                             <div class="form-row">
                                 <div class="col-md-10 offset-md-1">
                                     <div class="form-group">
+
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" name="remember"> Remember me</label>
                                         <!-- Add a Remember me functionality -->
                                         {{ form.remember_me }}
-                                        <label> Remember me</label>
                                     </div>
                                 </div>
                             </div>
