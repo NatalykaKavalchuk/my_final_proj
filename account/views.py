@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
@@ -7,8 +9,10 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 
 from django.contrib.auth import login, authenticate
+from django.views import View
 
-from account.forms import UserRegisterForm
+from account.forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from account.models import Profile
 
 
 def register_user(request):
@@ -16,8 +20,8 @@ def register_user(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # todo for future work
-            # Profile.objects.create(username=user)
+            #
+            Profile.objects.create(user=user)
 
             messages.info(request, "Thanks for registering. You are now logged in.")
 
@@ -72,3 +76,21 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name = 'registration/change_password.html'
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('users-home')
+
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='profile')
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+        profile_form = ProfileUpdateForm(instance=request.user.profile)
+
+    return render(request, 'registration/profile.html', {'user_form': user_form, 'profile_form': profile_form})

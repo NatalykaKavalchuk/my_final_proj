@@ -5,7 +5,7 @@ from django.urls import path
 
 import account
 import events.views
-from account.views import ResetPasswordView, register_user
+
 
 urlpatterns = [
     path('', events.views.home_page, name='home_page'),

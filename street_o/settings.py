@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,7 +41,9 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'crispy_forms',
     'bootstrap4',
-    'account'
+    'account',
+
+
 
 ]
 
@@ -121,7 +122,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
