@@ -7,39 +7,11 @@
 {% load bootstrap4 %}
 
 
-<div class="container py-3">
-    <h2>Календарь мероприятий</h2>
-    <hr>
-    <br>
-    <div class="row">
-        {% for x in events %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100" style="border:none">
-
-                <img src="{{ x.poster.url }}" class="card-img-top" alt="{{ x.title_event}}"
-                     style="width: auto; height: 310px; object-fit: scale-down;">
-                <div class="card-body">
-                    <h5 class="card-title">{{ x.title_event }}</h5>
-                    <p class="card-text text-muted" style="font-size:12px">{{ x.date }}</p>
-                    <a href="details/{{ x.id }}" class="btn btn-info">Подробнее</a>
-                    {% if perms.events.add_events %}
-                    <a href="delete_event/{{x.id}}" class="btn btn-outline-danger">Удалить</a>
-                    {% endif%}
-                    <br>
-                    <br>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
-
 <style>
 .button {
-    position: fixed;
-    right: 20px;
-    top: 25%;
+    position: absolute;
+    right: 390px;
+    top: 7%;
     border-radius: 4px;
     background-color: #3F729B;
     border: none;
@@ -79,10 +51,42 @@
 }
 
 
+
+
 </style>
 
-{% if perms.events.add_events %}
-<a href="{% url 'create_event' %}" class="button"><span>Add new event</span></a>
-{% endif %}
+
+<div class="container py-3">
+    <h2>Календарь мероприятий</h2>
+    {% if perms.events.add_events %}
+        <a href="{% url 'create_event' %}" class="button"><span>Add new event</span></a>
+    {% endif %}
+
+
+    <hr>
+    <br>
+    <div class="row">
+        {% for x in events %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100" style="border:none">
+
+                <img src="{{ x.poster.url }}" class="card-img-top" alt="{{ x.title_event}}"
+                     style="width: auto; height: 310px; object-fit: scale-down;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ x.title_event }}</h5>
+                    <p class="card-text text-muted" style="font-size:12px">{{ x.date }}</p>
+                    <a href="details/{{ x.id }}" class="btn btn-info">Подробнее</a>
+                    {% if perms.events.add_events %}
+                    <a href="delete_event/{{x.id}}" class="btn btn-outline-danger">Удалить</a>
+                    {% endif%}
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
+
