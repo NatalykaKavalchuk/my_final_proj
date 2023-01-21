@@ -10,7 +10,7 @@
 <style>
 .button {
     position: absolute;
-    right: 390px;
+    right: 21%;
     top: 7%;
     border-radius: 4px;
     background-color: #3F729B;
@@ -76,6 +76,9 @@
                     <h5 class="card-title">{{ x.title_event }}</h5>
                     <p class="card-text text-muted" style="font-size:12px">{{ x.date }}</p>
                     <a href="details/{{ x.id }}" class="btn btn-info">Подробнее</a>
+                    {% if perms.events.add_events %}
+                    <a href="update_event/{{x.id}}" class="btn btn-outline-secondary">Изменить</a>
+                    {% endif%}
                     {% if perms.events.add_events %}
                     <a href="delete_event/{{x.id}}" class="btn btn-outline-danger">Удалить</a>
                     {% endif%}

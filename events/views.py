@@ -29,6 +29,19 @@ def create_event(request):
                   context={'event_form': event_form, 'events': events})
 
 
+def update_event(request, id):
+    event = Events.objects.get(id=id)
+    if request.method == "POST":
+        event_form = EventForm(request.POST, request.FILES, instance=event)
+        if event_form.is_valid():
+            event_form.save()
+            return redirect('events')
+    event_form = EventForm(instance=event)
+    return render(request, 'update_event.html', {'event': event, 'event_form': event_form})
+
+
+
+
 def delete_event(request, id):
     event = Events.objects.get(id=id)
     event.delete()
