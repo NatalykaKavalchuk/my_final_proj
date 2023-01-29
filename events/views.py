@@ -40,8 +40,6 @@ def update_event(request, id):
     return render(request, 'update_event.html', {'event': event, 'event_form': event_form})
 
 
-
-
 def delete_event(request, id):
     event = Events.objects.get(id=id)
     event.delete()
@@ -88,4 +86,3 @@ def registration_to_event(request, id):
     registrations = Registration.objects.all()
     return render(request=request, template_name="registration.html",
                   context={'registration_form': RegistrationForm, 'registrations': registrations, 'event': event, })
-
