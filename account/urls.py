@@ -8,7 +8,7 @@ import events.views
 from account.views import ResetPasswordView, register_user
 
 urlpatterns = [
-    path('account/register', register_user, name='register'),
+    path('register', register_user, name='register'),
     path('login/', account.views.login_user, name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
     path('password_reset/', ResetPasswordView.as_view(template_name='registration/password_reset.html'),

@@ -15,11 +15,6 @@ urlpatterns = [
     path('events/update_event/<int:id>', events.views.update_event, name='update-event'),
     path('events/delete_event/<int:id>', events.views.delete_event, name='delete-event'),
     path('events/details/<int:id>/registration', events.views.registration_to_event, name='registration'),
-    path('account/register', register_user, name='register'),
-    path('login/', account.views.login_user, name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
-    path('password_reset/', ResetPasswordView.as_view(template_name='registration/password_reset.html'),
-         name='password_reset'),
 
 ]
 
