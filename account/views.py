@@ -20,7 +20,7 @@ def register_user(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            #
+
             Profile.objects.create(user=user)
 
             messages.info(request, "Thanks for registering. You are now logged in.")
