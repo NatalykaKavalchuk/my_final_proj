@@ -1,10 +1,11 @@
-Grodno Street-O
+# Grodno Street-O
 
 Название проекта: Web site for Grodno Street-O
 
-Автор: Nattalia Kavalchuk
+Автор: Natallia Kavalchuk
 
-О проекте:  Проект "Web site for Grodno Street-O" создан в качестве финального проекта курса Разработка web приложений 
+## О проекте:  
+Сайт "Web site for Grodno Street-O" создан в качестве финального проекта курса Разработка web приложений 
 на Python, IT-academy, г. Гродно
 
 Данный проект создан с целью обобщения информации о серии открытых тренировок Grodno Street-O по спортивному 
@@ -21,3 +22,17 @@ Grodno Street-O
 3. Улучшение главной страницы: информационное оформление и сопровождение
 4. Развитие дополнительного функционала, использование дополнительных сторонних библиотек для отображения функционала.
 
+## Quick Start:
+To get this project up and running locally on your computer follow the following steps.
+
+1. Clone the repository https://github.com/NatalykaKavalchuk/my_final_proj.git
+2. Set up a python virtual environment
+3. Run the following commands
+```
+$ pip install -r requirements.txt
+$ python manage.py migrate
+$ python manage.py createsuperuser
+$ python manage.py runserver
+```
+
+4. Open a browser and go to http://localhost:8000/
