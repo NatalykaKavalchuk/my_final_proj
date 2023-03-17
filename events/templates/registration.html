@@ -1,21 +1,25 @@
 {% extends "master.html" %}
 
 {% block title %} Login Page {% endblock title%}
-
 {% block content %}
 
 <div class="form-content my-3 p-3">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
+            <div class="col-lg-7">
+                <div class="card shadow-lg border-0 rounded-lg mt-0 mb-5">
                     <div class="card-header justify-content-center">
-                        <h3 class="font-weight-light my-1 text-center">Регистрация на {{ event.id }} этап Street-O</h3>
-                        <p class="font-weight-light my-1 text-center">{{event.title_event}}</p>
+                        <div class="card-header justify-content-center">
+                            <div class="row no-gutters">
+                                <h3 class="font-weight-light my-1 text-center">Регистрация на {{ event.id }} этап
+                                    Street-O</h3>
+                            </div>
 
-                    </div>
+                            <p class="font-weight-light my-1 text-center">{{event.title_event}}</p>
 
-                    {% load crispy_forms_tags %}
+                        </div>
+
+                        {% load crispy_forms_tags %}
 
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
@@ -30,12 +34,12 @@
                         {% if text_messages %}
                         <p> {{ text_messages }}</p>
                         {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </div>
-
 
 {% endblock %}
