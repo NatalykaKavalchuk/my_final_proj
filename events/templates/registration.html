@@ -10,24 +10,26 @@
             <div class="col-lg-5">
                 <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
                     <div class="card-header justify-content-center">
-                        <h3 class="font-weight-light my-1 text-center">Регистрация на {{ events.id }} этап Street-O</h3>
+                        <h3 class="font-weight-light my-1 text-center">Регистрация на {{ event.id }} этап Street-O</h3>
+                        <p class="font-weight-light my-1 text-center">{{event.title_event}}</p>
+
                     </div>
 
                     {% load crispy_forms_tags %}
 
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{registration_form|crispy}}
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{reg_form|crispy}}
 
 
-                        {% if user.is_authenticated %}
-                        <button class="btn btn-primary my-4" type="submit">Зарегистрироваться</button>
-                        {% endif%}
-                    </form>
+                            {% if user.is_authenticated %}
+                            <button class="btn btn-info my-4" type="submit">Зарегистрироваться</button>
+                            {% endif%}
+                        </form>
 
-                    {% if text_messages %}
-                    <p> {{ text_messages }}</p>
-                    {% endif %}
+                        {% if text_messages %}
+                        <p> {{ text_messages }}</p>
+                        {% endif %}
                 </div>
             </div>
         </div>

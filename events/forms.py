@@ -22,15 +22,11 @@ class EventForm(forms.ModelForm):
 
 
 class RegistrationForm(forms.ModelForm):
-    DISTANCE_CHOICES = [
-        ('м21А', 'М21А'),
-        ('м21Е', 'М21Е'),
-        ('ж21А', 'Ж21А'),
-        ('ж21Е', 'Ж21Е'),
-    ]
-
-    distance = forms.ChoiceField(choices=DISTANCE_CHOICES)
+    first_name = forms.CharField(max_length=100, required=False, label='First Name:',
+                                 widget=forms.TextInput(attrs={'class': 'form-control', }))
+    last_name = forms.CharField(max_length=100, required=False, label='Last Name:',
+                                widget=forms.TextInput(attrs={'class': 'form-control', }))
 
     class Meta:
         model = Registration
-        fields = ['distance']
+        fields = ['first_name', 'last_name', 'distance']

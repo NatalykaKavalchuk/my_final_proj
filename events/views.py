@@ -7,6 +7,8 @@ from django.template import loader
 from events.forms import EventForm, RegistrationForm
 from events.models import Events, Registration
 
+from django.contrib.auth.models import User
+
 
 def home_page(request):
     return render(request, 'home_page.html')
@@ -69,20 +71,31 @@ def details(request, id):
 
 @login_required(login_url='/login')
 def registration_to_event(request, id):
+    person_data = {
+        'first_name': request.user.first_name,
+        'last_name': request.user.last_name
+    }
+
     event = Events.objects.get(id=id)
     if request.method == "POST":
         registration = Registration()
         registration.user = request.user
+        registration.first_name = request.user.first_name
+        registration.last_name = request.user.last_name
         registration.event = event
         registration.distance = request.POST['distance']
         if registration:
             registration.save()
 
             messages.success(request, 'You have successfully registered to event!')
+
         else:
             messages.error(request, 'Error saving form')
 
-        return redirect("events")
+    reg_form = RegistrationForm(initial=person_data)
     registrations = Registration.objects.all()
     return render(request=request, template_name="registration.html",
-                  context={'registration_form': RegistrationForm, 'registrations': registrations, 'event': event, })
+                  context={'reg_form': reg_form, 'registrations': registrations, 'event': event, })
+
+
+
