@@ -55,7 +55,7 @@ class Registration(models.Model):
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
 
-    event = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True)
+    event = models.ForeignKey(Events, on_delete=models.SET_NULL, null=True, related_name='registrations')
     distance = models.CharField(max_length=4, choices=DISTANCE_CHOICES)
     data_reg = models.DateField(auto_now=False, auto_now_add=True, null=True, blank=True)
 

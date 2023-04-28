@@ -40,7 +40,6 @@
                                         {% endif%}
                                         {% endif %}
                                         <br>
-
                                         <br>
                                     </div>
                                     {% else %}
@@ -50,8 +49,35 @@
                                     <h5><a href="{{ event.result }}">Результаты</a></h5>
                                     {% endif %}
                                     {% endif %}
-                                    <br>
                                     <hr>
+
+                                    <h6>Количество зарегистрированных участников: {{ event.registrations.count }}</h6>
+
+                                    <table class="table table-striped table-bordered">
+                                        <thead class="thead-light">
+                                        <tr>
+                                            <td>№</td>
+                                            <td>Фамилия</td>
+                                            <td>Имя</td>
+                                            <td>Дистанция</td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for participant in event.registrations.all %}
+                                        <tr>
+                                            <td> {{ forloop.counter }}</td>
+                                            <td> {{ participant.last_name}}</td>
+                                            <td> {{ participant.first_name }}</td>
+                                            <td> {{ participant.distance }}</td>
+
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+
+                                    </table>
+                                    <hr>
+
+
                                 </div>
                             </div>
                         </div>
